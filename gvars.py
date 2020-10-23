@@ -2,6 +2,7 @@
 
 
 from pathlib import Path
+import os
 from datetime import datetime
 
 MAX_WORKERS = 10 # max threads at a time
@@ -13,8 +14,8 @@ operEquity = 30000 # defines the target amount per execution ($)
 limitOrderMargin = 0.1 # percentage that defines the offset for the limit orders
 
 # YOUR API KEYS AT ALPACA GO HERE!
-API_KEY = "PKG61NXRSLADM38CYM3N"
-API_SECRET_KEY = "ptmriQyzDQApgCwyscX5bZbxa1YL0rRodIjuTOfP"
+API_KEY = os.environ["APCA_API_KEY_ID"]
+API_SECRET_KEY = os.environ["APCA_API_SECRET_KEY"]
 ALPACA_API_URL = "https://paper-api.alpaca.markets"
 
 # this block checks whether you have your keys written or not
