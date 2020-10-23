@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-# This code is free, THANK YOU!
-# It is explained at the guide you can find at www.theincompleteguide.com
-# You will also find improvement ideas and explanations
-
 import alpaca_trade_api as tradeapi
 
 import numpy as np
@@ -197,7 +193,7 @@ class Trader:
         qty = orderDict['qty']
         time_in_force = 'gtc'
 
-        if orderDict['type'] is 'limit': # adjust order for a limit type
+        if orderDict['type'] is 'limit':  # adjust order for a limit type
             type = 'limit'
             self._L.info('Desired limit price for limit order: %.3f$' % orderDict['limit_price'])
 

@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-# This code is free, THANK YOU!
-# It is explained at the guide you can find at www.theincompleteguide.com
-# You will also find improvement ideas and explanations
-
 from stocklib import *
 from traderlib import *
 from other_functions import *
@@ -67,6 +63,17 @@ def clean_open_orders(api):
     for order in orders:
       api.cancel_order(order.id)
 
+
+def clean_positions(api):
+    # Sell all positions
+    positions = api.list_positions()
+    print('\nSELL OPEN POSITIONS')
+    print(print('%i positions were found' % int(len(positions))))
+    for position in positions:
+        api.submit_order(position.symbol, position.qty, 'sell', 'market', 'day')
+        print(position.qty + " shares of " +position.symbol + " sold" )
+
+
 def check_account_ok(api):
 
     account = api.get_account()
@@ -74,6 +81,7 @@ def check_account_ok(api):
 
         print('OJO, account blocked. WTF?')
         import pdb; pdb.set_trace()
+
 
 def run_tbot(_L,assHand,account):
 
@@ -91,6 +99,7 @@ def run_tbot(_L,assHand,account):
             assHand.lock_asset(ticker)
         else:
             assHand.make_asset_available(ticker)
+
 
 def main():
 
@@ -123,6 +132,7 @@ def main():
         check_account_ok(api) # check if it is ok to trade
         account = api.get_account()
         clean_open_orders(api) # clean all the open orders
+        clean_positions(api)
         _L.info("Got it")
     except Exception as e:
         _L.info(str(e))
